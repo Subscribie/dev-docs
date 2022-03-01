@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <body>
+<style>
+:root {
+  --sidebar-width: 206px;
+  --sidebar-height: 100%;
+  --content-margin-left: calc(var(--sidebar-width ) + 10px);
+  --example-width: 40vw;
+  --method-area-padding: 5vw;
+  --copy-width: calc(var(--example-width) - var(--method-area-padding));
+}
+#sidebar {
+  display: block;
+  position: fixed;
+  width: var(--sidebar-width);
+  height: var(--sidebar-height);
+  background: #f9f9f9;
+}
+
+#content {
+  margin-left: var(--content-margin-left);
+}
+
+.method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.method-area {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.method-area-divider {
+  height: 1px;
+  background: lightgrey;
+}
+
+.method-copy {
+  width: var(--copy-width);
+}
+</style>
+<div id="api-reference">
+  <div id="sidebar">
+    <nav>
+      <ul class="sidebar-nav-items">
+        <li>Introduction</li>
+        <li>Quickstart</li>
+      </ul>
+    </nav>
+  </div><!-- end sidebar -->
+  <div id="content">
+    <section id="introduction" class="method">
+      <div class="method-area">
+        <div class="method-area-divider"></div>
+          <div class="method-copy">
+            <h1>Introduction</h1>
+            <p>Subscribie helps you collect and manage recurring payments easily.</p>
+            <p>You can use use these docs to add subscription payments
+            to your app or web application, saving you hundreds of hours of development.</p>
+            <p>Subscribie has built-in many <a href="https://github.com/Subscribie/subscribie#features">features</a>
+            for recurring payments, sign-up flow, sign-up links and administration such as managing refunds.</p>
+            <p>Some of Subscribie is built on-top of Stripe, however, using Subscribie will save you time if
+            you want to build all the background management features, we've written that for you.</p>
+          </div><!-- end method-copy -->
+          <div class="method-example">
+            <p>This is an example of how to use it.</p>
+          </div>
+      </div><!-- end method-adrea -->
+    </section>
+  </div>
+</div>
+</body>
+</html>
