@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
   <body>
 <style>
 :root {
+  --lightgrey: #f9f9f9;
   --sidebar-width: 206px;
   --sidebar-height: 100%;
   --content-margin-left: calc(var(--sidebar-width ) + 10px);
@@ -10,12 +14,18 @@
   --method-area-padding: 5vw;
   --copy-width: calc(var(--example-width) - var(--method-area-padding));
 }
+
+body {
+  font-family: sans-serif;
+}
+
+
 #sidebar {
   display: block;
   position: fixed;
   width: var(--sidebar-width);
   height: var(--sidebar-height);
-  background: #f9f9f9;
+  background: var(--lightgrey);
 }
 
 #content {
@@ -36,22 +46,68 @@
 
 .method-area-divider {
   height: 1px;
-  background: lightgrey;
+  background: var(--lightgrey);
 }
 
 .method-copy {
   width: var(--copy-width);
 }
+
+/* Mobile view */
+@media (max-width: 900px) {
+
+  :root {
+    --header-height: 50px;
+  }
+
+  #MobileNav {
+    position: fixed;
+    width: 100%;
+    height: var(--header-height);
+    background: white;
+    border-bottom: 1px solid black;
+  }
+
+  #content {
+    padding-top: var(--header-height);
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  #content {
+    margin-left: 0px;
+  }
+
+  .method-area {
+    flex-direction: column;
+  }
+
+  .method-copy {
+    width: 100%;
+  }
+}
+/* End Mobile view */
 </style>
 <div id="api-reference">
   <div id="sidebar">
     <nav>
       <ul class="sidebar-nav-items">
-        <li>Introduction</li>
-        <li>Quickstart</li>
+        <li><a href="#introduction">Introduction</></li>
+        <li><a href="#quickstart">Quickstart</a></li>
       </ul>
     </nav>
   </div><!-- end sidebar -->
+  <!-- Mobile nav -->
+  <div id="MobileNav" class="MobileNav">
+    <select id="MobileNav-select" onchange="location = this.value;">
+      <option value="#introduction">Introduction</option>
+      <option value="#quickstart">Quickstart</option>
+    </select>
+  </div>
+  <!-- end Mobile nav -->
+
   <div id="content">
     {% include 'introduction.html' %}
     {% include 'quickstart.html' %}
