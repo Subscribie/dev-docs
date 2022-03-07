@@ -2,6 +2,8 @@
 
 ### Local Development
 ```
+git clone https://github.com/Subscribie/dev-docs.git
+cd dev-docs;
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
