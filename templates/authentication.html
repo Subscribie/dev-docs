@@ -1,0 +1,14 @@
+{% extends "method.template.html" %}
+
+{% block methodAnchor %}authentication{% endblock %}
+
+{% block methodCopy %}
+<h1>Authentication <a href="#authentication">#</a></h1>
+  <p>Subscribie helps you collect and manage recurring payments easily.</p>
+{% endblock methodCopy %}
+
+{% block methodExample %}
+  <code class= "code">
+     curl -v --user "fred:password" http://127.0.0.1:5000/auth/jwt-login
+  </code>
+{% endblock methodExample %}

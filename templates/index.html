@@ -96,6 +96,7 @@ body {
       <ul class="sidebar-nav-items">
         <li><a href="#introduction">Introduction</></li>
         <li><a href="#quickstart">Quickstart</a></li>
+        <li><a href="#authentication">Authentication</a></li>
       </ul>
     </nav>
   </div><!-- end sidebar -->
@@ -104,6 +105,7 @@ body {
     <select id="MobileNav-select" onchange="location = this.value;">
       <option value="#introduction">Introduction</option>
       <option value="#quickstart">Quickstart</option>
+      <option value="#authentication">Authentication</option>
     </select>
   </div>
   <!-- end Mobile nav -->
@@ -111,6 +113,7 @@ body {
   <div id="content">
     {% include 'introduction.html' %}
     {% include 'quickstart.html' %}
+    {% include 'authentication.html' %}
   </div>
 </div>
 </body>
