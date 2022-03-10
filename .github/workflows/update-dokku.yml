@@ -1,23 +1,24 @@
-name: 'Deploy to my Dokku instance'
-
+name: Deploy to Dokku
 on:
+  workflow_dispatch:
   push:
     branches:
-    - main
-
+      - main
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    name: deploy to Dokku
+    runs-on: ubuntu-20.04
     steps:
-  
-    - name: Cloning repo # This step is required
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0 # This is required or you might get an error from Dokku
-
-    - name: Push to dokku
-      uses: obrassard/action-dokku-deploy@v1.0.2
-      with:
-        dokku_repo: 'ssh://dokku@${{ secrets.DOKKU_IP_ADDRESS }}/dev-docs'
-        ssh_key: ${{ secrets.SSH_KEY }}
-        deploy_branch: 'main'
+    - name: Setup ssh access
+      run: |
+        set -x
+        mkdir -p ~/.ssh
+        eval `ssh-agent -s`
+        ssh-add - <<< "${{ secrets.SSH_KEY }}"
+        ssh-keyscan ${{ secrets.DOKKU_IP_ADDRESS }}>> ~/.ssh/known_hosts
+    - name: Pull new site
+      run: |
+        set -x
+        eval `ssh-agent -s`
+        ssh-add - <<< "${{ secrets.SSH_KEY}}"
+        ssh ${{ DOKKU_IP_ADDRESS }} -C "dokku git:sync --build dev-docs https://github.com/Subscribie/dev-docs.git main"
