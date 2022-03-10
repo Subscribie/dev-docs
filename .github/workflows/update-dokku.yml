@@ -18,6 +18,6 @@ jobs:
     - name: Push to dokku
       uses: obrassard/action-dokku-deploy@v1.0.2
       with:
-        dokku_repo: 'ssh://dokku@192.248.164.119/dev-docs'
+        dokku_repo: 'ssh://dokku@${{ DOKKU_IP_ADDRESS }}:dev-docs'
         ssh_key: ${{ secrets.SSH_KEY }}
         deploy_branch: 'main'
