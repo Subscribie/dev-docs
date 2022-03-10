@@ -118,3 +118,26 @@ body {
 </div>
 </body>
 </html>
+
+<script>
+function copyText(text) {
+  navigator.clipboard.writeText(text);
+
+}
+
+function copyTextFromElement(elementID) {
+  let element = document.querySelectorAll(elementID); //select the element
+  for (var i=0; i < element.length; i++) {
+    element[i].addEventListener('click', function(event) {
+      copyText(event.currentTarget.childNodes[0].textContent.replace(/[\n\r]+|[\s]{2,}/g, ''));
+      event.target.disabled = true
+      event.target.innerText="copied"
+
+      setTimeout(function(){
+      event.target.disabled = false
+      event.target.innerText="copy"
+      }, 3000);
+    });
+  }
+}
+</script>
