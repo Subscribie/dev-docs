@@ -1,0 +1,24 @@
+name: Deploy to Dokku
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: deploy to Dokku
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Setup ssh access
+      run: |
+        set -x
+        mkdir -p ~/.ssh
+        eval `ssh-agent -s`
+        ssh-add - <<< "${{ secrets.SSH_KEY }}"
+        ssh-keyscan ${{ secrets.DOKKU_IP_ADDRESS }}>> ~/.ssh/known_hosts
+    - name: Pull new site
+      run: |
+        set -x
+        eval `ssh-agent -s`
+        ssh-add - <<< "${{ secrets.SSH_KEY}}"
+        ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku git:sync --build dev-docs https://github.com/Subscribie/dev-docs.git main"
