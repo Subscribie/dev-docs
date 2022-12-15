@@ -28,7 +28,7 @@ Add the ssh key of the local machine
 
 #### Local 
 ```
-git clone <repo>
+git clone <repo-name>
 git remote add dokku dokku@<ip-server-address>:<repository-name>
 git push dokku
 ```
