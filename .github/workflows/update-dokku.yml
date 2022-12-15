@@ -21,4 +21,6 @@ jobs:
         set -x
         eval `ssh-agent -s`
         ssh-add - <<< "${{ secrets.SSH_KEY}}"
+        echo Creating dokku app dev-docs
+        ssh dokku@$DOKKU_HOST -C "dokku apps:dev-docs" | true
         ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku git:sync --build dev-docs https://github.com/Subscribie/dev-docs.git main"
