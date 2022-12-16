@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     name: deploy to Dokku
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Check out repository code
       uses: actions/checkout@v3
@@ -27,3 +27,6 @@ jobs:
         ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku apps:create dev-docs" | true
         ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku git:initialize dev-docs"
         ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku git:sync --build dev-docs" https://github.com/Subscribie/dev-docs.git main
+        ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku config:set --no-restart dev-docs DOKKU_LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }}"
+        ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku letsencrypt:enable dev-docs"
+        ssh ${{ secrets.DOKKU_HOST }}@${{ secrets.DOKKU_IP_ADDRESS }} -C "dokku letsencrypt:cron-job --add"
